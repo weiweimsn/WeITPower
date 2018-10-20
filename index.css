@@ -1,0 +1,27 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+body{
+    /* background: url('https://i.ytimg.com/vi/rfZsNKADc4Y/maxresdefault.jpg') no-repeat;
+    background-size:cover; */
+}
+
+#buttonContainer{
+    margin: 0 auto;
+    width: 100%;
+    background-size: auto;
+    margin-top: 50px;
+    background-color: red;
+}
+
+#googleButton{
+    /* margin: 0 auto;
+    display: block;  */
+    width: 180px;
+    height: 70px;
+    background: url('https://www.1and1.ca/digitalguide/fileadmin/DigitalGuide/Teaser/google-search-t.jpg');
+    background-size: 180px 70px;
+}

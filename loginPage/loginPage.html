@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Wei Wei's Title</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="JavaScript.js"></script>
+    <link type="text/css" href="StyleSheet1.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        form {
+            color: #787878;
+        }
+
+        fieldset {
+            width: 60%;
+            min-height: 270px;
+            border: 1px solid black;
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        .clearFix {
+            content: " ";
+            clear: both;
+            display: block;
+        }
+
+        label {
+            font-weight: bold;
+            min-width: 90px;
+            width: 25%;
+            display: inline-block;
+            padding-left: 20px;
+        }
+
+        legend {
+            color: #a53e91;
+            font-size: 20px;
+            font-family: 'Times New Roman';
+        }
+
+        input[type='text'] {
+            width: 70%;
+            min-width: 40px;
+            display: inline-block;
+        }
+
+        input.submitButton {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin: auto;
+            display: block;
+        }
+
+        input.submitButton:hover{
+            background-color: green;
+        }
+
+        #buttons{
+            text-align: center;
+        }
+    </style>
+    <script>
+        function OKButtonClicked(){
+            alert("I just clicked the button");
+        }
+    </script>
+</head>
+
+<body>
+    <form id="form1" name="form1" method="post" action="" class="clearFix">
+        <fieldset class="clearFix">
+            <legend>Please Enter Your Information</legend>
+            <br />
+            <label for="usernameTextbox">User Name:</label>
+            <input type="text" name="usernameTextbox" />
+            <br />
+            <br />
+            <label for="passwordTextbox">Password:</label>
+            <input name="passwordTextbox" type="text" />
+            <br />
+            <br />
+            <label for="confirmPasswordTextbox">Cofnirm Password:</label>
+            <input name="confirmPasswordTextbox" type="text" />
+            <br />
+            <br />
+            <label for="confirmPasswordTextbox">ID Type:</label>
+            <select>
+                <option>SIN</option>
+                <option>Driver License</option>
+            </select>
+            <br />
+            <br />
+            <label>ID Card No#.</label>
+            <input name="confirmPasswordTextbox" type="text" />
+            <br />
+            <br />
+            <label>Phone No#.</label>
+            <input name="phoneNumberTextbox" type="text" />
+        </fieldset>
+        <br/>
+        <input type="button" class="submitButton" value="OK" onclick="OKButtonClicked()"/>
+        
+    </form>
+</body>
+
+</html>
