@@ -1,14 +1,23 @@
-html, body{
+html, body, #slideshow{
     height: 100%;
     margin: 0 auto;
     padding: 0;
+    text-align: center;
 }
 
-#slideshow { 
-    margin: 50px auto; 
-    position: relative; 
-    width: 1200px; 
-    height: 800px; 
+#slideshow{
+    position: relative;
+}
+
+img { 
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width:auto;
+    height: auto;
+    max-width: 60%;
+    max-height: 60%;
     padding: 10px; 
     box-shadow: 0 0 20px rgba(0,0,0,0.4); 
 }
@@ -20,4 +29,21 @@ html, body{
     left: 10px; 
     right: 10px; 
     bottom: 10px; 
+}
+
+.leftTurn, .rightTurn{
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(93, 87, 94);
+    position: relative;
+}
+.leftTurn{
+    left: 17%;
+    top:-50%;
+}
+.rightTurn{
+    left: 79.5%;
+    top:-50%;
+    transform: translateY(-100%);
 }
