@@ -1,9 +1,11 @@
 window.onload = function(){
-    renderCalendar();
-
+    // renderCalendarDays();
+    var rowsOfCurrentMonth = CountOfRow();
+    RenderCalander(rowsOfCurrentMonth);
+    renderCalendarDays();
 }
 
-function renderCalendar(){
+function renderCalendarDays(){
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
@@ -18,14 +20,15 @@ function renderCalendar(){
     var count = 1;
     var startIndex = firstDay + 6;
     var currentDay;
+    var gap = firstDay - 1 + 6;
     
     while(count <= numberOfDays){
         var calendarCell = document.getElementsByClassName("col");
         // show time
         var time = hour + ' : ' + minutes + ' ' + seconds;
         calendarCell[startIndex].innerHTML = count;
-        calendarCell[today + 11].classList.add('today'); 
-        currentDay = calendarCell[today + 11];
+        calendarCell[today + gap].classList.add('today'); 
+        currentDay = calendarCell[today + gap];
         count++;
         startIndex++;
     }
@@ -47,4 +50,33 @@ function SetTime(currentDay,today, hour, minute, second){
         var time = hour + ' : ' + minute + ' ' + second;
         currentDay.innerHTML = today + '</br>' + '</br>' + time;
     }, (1000));
+}
+
+function CountOfRow(firstDayOfWeek, currentMonth, currentYear){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var numberOfDays = new Date(year, month + 1, 0).getDate();
+    var firstDay = new Date(year, month, 1).getDay();
+
+    var rows = Math.ceil((numberOfDays + firstDay - 1) / 7);
+    return rows;
+}
+
+function RenderCalander(rows){
+    var calendar = document.getElementsByClassName('container')[0];
+
+    for(var i= 0; i< rows; i ++){
+        // create rows
+        var row = document.createElement('div');
+        row.className = 'row';
+
+        // create days in a row
+        for(var j = 0; j< 7; j++){
+            var cell = document.createElement('div');
+            cell.className = 'col';
+            row.appendChild(cell);
+        }
+        calendar.appendChild(row);
+    }
 }
