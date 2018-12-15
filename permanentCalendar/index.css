@@ -1,25 +1,85 @@
-html, body{
+@media (max-width: 700px) {
+    html {
+        font-size: 1.2rem;
+    }
+    .row.header>div {
+        font-size: 1rem;
+    }
+    .col {
+        font-size: 1rem;
+    }
+    .col.today>div {
+        font-size: 0.6rem;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media (max-width: 540px) {
+    html {
+        font-size: 1rem;
+    }
+    .row.header>div, .col.today>div {
+        /* font-size: 0.5rem; */
+    }
+    .col {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 420px) {
+    html {
+        font-size: 1rem;
+    }
+    .row.header>div {
+        /* font-size: 0.8rem; */
+    }
+    .col {
+        font-size: 1rem;
+    }
+    .col.today>div {}
+}
+
+html {
+    font-size: 1rem;
+}
+
+html, body, .container {
     height: 100%;
     margin: 0 auto;
     padding: 0;
 }
-.col{
+
+.col {
     height: 84px;
     border: 1px solid lightgray;
 }
 
-.row.header{
+.row.header {
     background-color: rgb(150, 117, 206);
     height: 5%;
     color: white;
     font-size: 1rem;
     margin-bottom: 1%;
+    box-sizing: border-box;
 }
 
-.row.header > div{
-   height: 100%;
+.calendarBody {
+    height: 90%;
+    font-size: 1rem;
+    margin-bottom: 1%;
+    box-sizing: border-box;
 }
 
-.today{
+.row.header>div {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.today {
     background-color: greenyellow;
 }

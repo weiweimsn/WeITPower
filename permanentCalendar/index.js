@@ -48,7 +48,7 @@ function SetTime(currentDay,today, hour, minute, second){
         }
         hour = hour >= 24? hour % 24: hour;
         var time = hour + ' : ' + minute + ' ' + second;
-        currentDay.innerHTML = today + '</br>' + '</br>' + time;
+        currentDay.innerHTML = today + '</br>' + '</br>' + '<div>' + time + '</div>';
     }, (1000));
 }
 
@@ -64,7 +64,7 @@ function CountOfRow(firstDayOfWeek, currentMonth, currentYear){
 }
 
 function RenderCalander(rows){
-    var calendar = document.getElementsByClassName('container')[0];
+    var calendar = document.getElementsByClassName('calendarBody')[0];
 
     for(var i= 0; i< rows; i ++){
         // create rows
