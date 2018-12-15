@@ -33,6 +33,8 @@ function renderCalendarDays(){
         startIndex++;
     }
     SetTime(currentDay, today, hour, minutes,seconds);
+
+    setDisplayMonth(month  - 1);
 }
 
 function SetTime(currentDay,today, hour, minute, second){
@@ -52,7 +54,7 @@ function SetTime(currentDay,today, hour, minute, second){
     }, (1000));
 }
 
-function CountOfRow(firstDayOfWeek, currentMonth, currentYear){
+function CountOfRow(){
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth();
@@ -78,5 +80,50 @@ function RenderCalander(rows){
             row.appendChild(cell);
         }
         calendar.appendChild(row);
+    }
+}
+
+function setDisplayMonth(month){
+    var currentMonth = document.getElementById('currentMonth');
+    switch(month){
+        case 0:
+            currentMonth.innerHTML = 'January';
+            break;
+        case 1:
+            currentMonth.innerHTML = 'Februry';
+            break;
+        case 2:
+            currentMonth.innerHTML = 'March';
+            break;
+        case 3:
+            currentMonth.innerHTML = 'April';
+            break;
+        case 4:
+            currentMonth.innerHTML = 'May';
+            break;
+        case 5:
+            currentMonth.innerHTML = 'June';
+            break;
+        case 6:
+            currentMonth.innerHTML = 'July';
+            break;
+        case 7:
+            currentMonth.innerHTML = 'August';
+            break;
+        case 8:
+            currentMonth.innerHTML = 'September';
+            break;
+        case 9:
+            currentMonth.innerHTML = 'October';
+            break;
+        case 10:
+            currentMonth.innerHTML = 'November';
+            break;
+        case 11:
+            currentMonth.innerHTML = 'December';
+            break;
+        default:
+            currentMonth.innerHTML = 'Error';
+            break;
     }
 }
