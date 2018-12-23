@@ -1,17 +1,29 @@
-window.onload = function(){
+var thisMonth;
+
+window.onload = function () {
+    preLoad();
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow();
     RenderCalander(rowsOfCurrentMonth);
-    renderCalendarDays();
+    renderCalendarDays(new Date());
+    // getLunarCalendar();
 }
 
-function renderCalendarDays(){
-    var date = new Date();
+
+function preLoad(){
+    var prevMonth = document.getElementsByClassName("previousMonth")[0];
+    var nextMonth = document.getElementsByClassName("nextMonth")[0];
+
+    prevMonth.addEventListener('click', goToPrevMonth);
+    nextMonth.addEventListener('click', goToNextMonth);
+}
+
+function renderCalendarDays(date) {
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
     var today = date.getDate();
     var firstDay = new Date(year, month - 1, 1).getDay();
-    var dayOfWeek = date.getDay() === 0? 7: date.getDate();
+    var dayOfWeek = date.getDay() === 0 ? 7 : date.getDate();
     var numberOfDays = new Date(year, month, 0).getDate();
     var hour = date.getHours();
     var minutes = date.getMinutes();
@@ -21,40 +33,40 @@ function renderCalendarDays(){
     var startIndex = firstDay + 6;
     var currentDay;
     var gap = firstDay - 1 + 6;
-    
-    while(count <= numberOfDays){
+
+    while (count <= numberOfDays) {
         var calendarCell = document.getElementsByClassName("col");
         // show time
         var time = hour + ' : ' + minutes + ' ' + seconds;
         calendarCell[startIndex].innerHTML = count;
-        calendarCell[today + gap].classList.add('today'); 
+        calendarCell[today + gap].classList.add('today');
         currentDay = calendarCell[today + gap];
         count++;
         startIndex++;
     }
-    SetTime(currentDay, today, hour, minutes,seconds);
+    // SetTime(currentDay, today, hour, minutes,seconds);
 
-    setDisplayMonth(month  - 1);
+    setDisplayMonth(month - 1);
 }
 
-function SetTime(currentDay,today, hour, minute, second){
+function SetTime(currentDay, today, hour, minute, second) {
     setInterval(() => {
-        second ++;
-        if(second >= 60){
+        second++;
+        if (second >= 60) {
             second = second % 60;
-            minute ++;
+            minute++;
         }
-        if(minute >= 60){
+        if (minute >= 60) {
             minute = minute % 60;
             hour++;
         }
-        hour = hour >= 24? hour % 24: hour;
+        hour = hour >= 24 ? hour % 24 : hour;
         var time = hour + ' : ' + minute + ' ' + second;
         currentDay.innerHTML = today + '</br>' + '</br>' + '<div>' + time + '</div>';
     }, (1000));
 }
 
-function CountOfRow(){
+function CountOfRow() {
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth();
@@ -65,16 +77,16 @@ function CountOfRow(){
     return rows;
 }
 
-function RenderCalander(rows){
+function RenderCalander(rows) {
     var calendar = document.getElementsByClassName('calendarBody')[0];
 
-    for(var i= 0; i< rows; i ++){
+    for (var i = 0; i < rows; i++) {
         // create rows
         var row = document.createElement('div');
         row.className = 'row';
 
         // create days in a row
-        for(var j = 0; j< 7; j++){
+        for (var j = 0; j < 7; j++) {
             var cell = document.createElement('div');
             cell.className = 'col';
             row.appendChild(cell);
@@ -83,8 +95,9 @@ function RenderCalander(rows){
     }
 }
 
-function setDisplayMonth(month){
+function setDisplayMonth(month) {
     var currentMonth = document.getElementById('currentMonth');
+    thisMonth = month;
     switch(month){
         case 0:
             currentMonth.innerHTML = 'January';
@@ -126,4 +139,41 @@ function setDisplayMonth(month){
             currentMonth.innerHTML = 'Error';
             break;
     }
+}
+
+function getLunarCalendar() {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        // code for old IE browsers
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementsByClassName("col today")[0].innerHTML = this.responseText;
+        }
+    };
+    xmlhttp.open("POST", "https://www.sojson.com/open/api/lunar/json.shtml", true);
+
+    xmlhttp.setRequestHeader("Content-Type","application/json");
+    // xmlhttp.setRequestHeader("X-Requested-With","XMLHttpRequest");
+    //supported in new browsers...do JSONP based stuff in older browsers...figure out how
+    xmlhttp.setRequestHeader("Access-Control-Allow-Origin","https://www.sojson.com/open/api/lunar/json.shtml");
+    xmlhttp.setRequestHeader("Accept","application/json");
+
+    xmlhttp.send();
+}
+
+function goToPrevMonth(){
+    var date = new Date();
+    date.setMonth(thisMonth - 1);
+    document.getElementsByClassName('calendarBody')[0].innerHTML = '';
+    renderCalendarDays(date);
+}
+
+function goToNextMonth(){
+
 }
