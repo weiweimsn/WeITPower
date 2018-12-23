@@ -86,22 +86,23 @@ html, body, .container {
 
 .row.currentMonthRow{
     justify-content: center;
+    align-items: center;
+}
+
+.row.currentMonthRow span{
+    font-size: 2rem;
+    margin: 0 30px;
+}
+
+#currentMonth{
     font-size: 2rem;
 }
 
 .previousMonth, .nextMonth {
     border: none;
     text-decoration: none;
-    display: inline-block;
     font-size:  1rem;
     border-radius: 5px;
-    height: 80%;
-}
-
-.previousMonth{
-    margin-right: 2rem;
-}
-
-.nextMonth{
-    margin-left: 2rem;
+    height: 30px;
+    align-items: center;
 }
