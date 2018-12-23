@@ -6,7 +6,7 @@ window.onload = function () {
     var rowsOfCurrentMonth = CountOfRow();
     RenderCalander(rowsOfCurrentMonth);
     renderCalendarDays(new Date());
-    // getLunarCalendar();
+    getLunarCalendar();
 }
 
 
@@ -170,7 +170,7 @@ function getLunarCalendar() {
 function goToPrevMonth(){
     var date = new Date();
     date.setMonth(thisMonth - 1);
-    document.getElementsByClassName('calendarBody')[0].innerHTML = '';
+    // document.getElementsByClassName('calendarBody')[0].innerHTML = '';
     renderCalendarDays(date);
 }
 
