@@ -52,6 +52,10 @@ function renderCalendarDays(date) {
         var lunarDate = document.createElement('div');
         lunarDate.className = 'lunarDate';
         const lunarInfo = Lunar.toLunar(year, month, count);
+        if(lunarInfo[8] !== ""){
+            lunarDate.innerHTML = lunarInfo[8];
+            lunarDate.style.color = "red";
+        }
         lunarDate.innerHTML = lunarInfo[8] === "" ? lunarInfo[5] + ' ' + lunarInfo[6]: lunarInfo[8];
         calendarCell[startIndex].appendChild(lunarDate);
 
