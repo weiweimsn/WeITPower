@@ -3,6 +3,7 @@ var YearChangeEvent;
 var currentYear;
 
 window.onload = function () {
+    console.log(Lunar.toLunar(2018,12,22));
     preLoad();
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(new Date());
@@ -43,13 +44,15 @@ function renderCalendarDays(date) {
     while (count <= numberOfDays) {
         var calendarCell = document.getElementsByClassName("col");
         var span = document.createElement('span');
+        span.classList.add('font-weight-bold');
+        span.classList.add('text-center');
         span.innerText = count;
         calendarCell[startIndex].appendChild(span);
 
         var lunarDate = document.createElement('div');
         lunarDate.className = 'lunarDate';
         const lunarInfo = Lunar.toLunar(year, month, count);
-        lunarDate.innerHTML = lunarInfo[5] + ' ' + lunarInfo[6];
+        lunarDate.innerHTML = lunarInfo[8] === "" ? lunarInfo[5] + ' ' + lunarInfo[6]: lunarInfo[8];
         calendarCell[startIndex].appendChild(lunarDate);
 
         calendarCell[today + gap].classList.add('today');

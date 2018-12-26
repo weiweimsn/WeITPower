@@ -1,0 +1,24 @@
+/* extra small devices - screen width less than 576px */
+@media screen and (max-width: 576px) {
+    html {
+        font-size: 0.5rem;
+    }
+    .row.currentMonthRow{
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+    }
+    .col {
+        font-size: 1rem;
+    }
+    .lunarDate{
+        font-size: 0.6rem;
+        margin-top: 15%;
+        font-style: italic;
+    }
+    .row.currentMonthRow{
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+    }
+}
