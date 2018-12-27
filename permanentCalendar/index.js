@@ -3,7 +3,7 @@ var YearChangeEvent;
 var currentYear;
 
 window.onload = function () {
-    console.log(Lunar.toLunar(2018,12,22));
+    console.log(Lunar.toLunar(2018, 12, 22));
     preLoad();
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(new Date());
@@ -43,20 +43,24 @@ function renderCalendarDays(date) {
 
     while (count <= numberOfDays) {
         var calendarCell = document.getElementsByClassName("col");
-        var span = document.createElement('span');
+        var span = document.createElement('div');
         span.classList.add('font-weight-bold');
         span.classList.add('text-center');
         span.innerText = count;
+        // if today is Saturday or Sunday, make it red
+        if ((startIndex - 5) % 7 === 0 || (startIndex - 6) % 7 === 0) {
+            span.style.color = "red";
+        }
         calendarCell[startIndex].appendChild(span);
 
         var lunarDate = document.createElement('div');
         lunarDate.className = 'lunarDate';
         const lunarInfo = Lunar.toLunar(year, month, count);
-        if(lunarInfo[8] !== ""){
+        if (lunarInfo[8] !== "") {
             lunarDate.innerHTML = lunarInfo[8];
             lunarDate.style.color = "red";
         }
-        lunarDate.innerHTML = lunarInfo[8] === "" ? lunarInfo[5] + ' ' + lunarInfo[6]: lunarInfo[8];
+        lunarDate.innerHTML = lunarInfo[8] === "" ? lunarInfo[5] + ' ' + lunarInfo[6] : lunarInfo[8];
         calendarCell[startIndex].appendChild(lunarDate);
 
         calendarCell[today + gap].classList.add('today');
