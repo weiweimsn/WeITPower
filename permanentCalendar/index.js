@@ -1,9 +1,10 @@
 var currentDate = new Date();
 var YearChangeEvent;
 var currentYear;
+var statHolidays;
+var holidays = [];
 
 window.onload = function () {
-    console.log(Lunar.toLunar(2018, 12, 22));
     preLoad();
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(new Date());
@@ -22,6 +23,8 @@ function preLoad() {
     nextMonth.addEventListener('click', goToNextMonth);
     currentYear.addEventListener('onYearChanged', setYearInfo);
     currentYear.dispatchEvent(YearChangeEvent);
+
+    updateStatHolidays(new Date().getFullYear());
 }
 
 function renderCalendarDays(date) {
@@ -36,7 +39,7 @@ function renderCalendarDays(date) {
     var seconds = date.getSeconds();
 
     var count = 1;
-    var startIndex = firstDay + 6;
+    var startIndex = firstDay == 0? 7 + 6 : firstDay + 6;
     var currentDay;
     var gap = firstDay - 1 + 6;
     currentDate = date;
@@ -51,6 +54,13 @@ function renderCalendarDays(date) {
         if ((startIndex - 5) % 7 === 0 || (startIndex - 6) % 7 === 0) {
             span.style.color = "red";
         }
+        // if today is a stat holiday or observed stat holiday, make it red
+        count = count < 10? "0" + count: count;
+        month = month < 10? "0" + month: month;
+        if(holidays.indexOf(year.toString()+ month + count) > -1){
+            span.style.color = "red"; 
+        }
+
         calendarCell[startIndex].appendChild(span);
 
         var lunarDate = document.createElement('div');
@@ -67,6 +77,9 @@ function renderCalendarDays(date) {
         currentDay = calendarCell[today + gap];
         count++;
         startIndex++;
+
+        month ++;
+        month --;
     }
     // SetTime(currentDay, today, hour, minutes,seconds);
 
@@ -95,6 +108,7 @@ function CountOfRow(date) {
     var month = date.getMonth();
     var numberOfDays = new Date(year, month + 1, 0).getDate();
     var firstDay = new Date(year, month, 1).getDay();
+    firstDay = firstDay == 0? 7 : firstDay;
 
     var rows = Math.ceil((numberOfDays + firstDay - 1) / 7);
     return rows;
@@ -183,6 +197,9 @@ function goToNextMonth() {
 
 function setYearInfo(e) {
     currentYear.innerHTML = currentDate.getFullYear() + '&nbsp&nbsp';
+
+    // upate stat holidays in a new year
+    holidays = updateStatHolidays(currentDate.getFullYear());
 }
 
 function createCORSRequest(method, url) {
@@ -207,4 +224,22 @@ function createCORSRequest(method, url) {
 
     }
     return xhr;
+}
+
+function updateStatHolidays(year){
+    // mount stat holidays
+    statHolidays = [];
+    tempHolidays = [];
+
+    statHolidays = CanadaStatHolidays.getStatHolidays(year)
+    for(var i = 0; i< statHolidays.length; i++){
+        // holidays.push(statHolidays[i].id);
+        if(statHolidays[i].observedDate){
+            tempHolidays.push(statHolidays[i].observedDate);
+        }
+        else{
+            tempHolidays.push(statHolidays[i].id);
+        }
+    }
+    return tempHolidays;
 }
