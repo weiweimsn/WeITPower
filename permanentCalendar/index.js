@@ -39,7 +39,7 @@ function renderCalendarDays(date) {
     var seconds = date.getSeconds();
 
     var count = 1;
-    var startIndex = firstDay == 0? 7 + 6 : firstDay + 6;
+    var startIndex = firstDay == 0 ? 7 + 6 : firstDay + 6;
     var currentDay;
     var gap = firstDay - 1 + 6;
     currentDate = date;
@@ -55,22 +55,29 @@ function renderCalendarDays(date) {
             span.style.color = "red";
         }
         // if today is a stat holiday or observed stat holiday, make it red
-        count = count < 10? "0" + count: count;
-        month = month < 10? "0" + month: month;
-        if(holidays.indexOf(year.toString()+ month + count) > -1){
-            span.style.color = "red"; 
+        count = count < 10 ? "0" + count : count;
+        month = month < 10 ? "0" + month : month;
+        if (holidays.indexOf(year.toString() + month + count) > -1) {
+            span.style.color = "red";
         }
-
         calendarCell[startIndex].appendChild(span);
 
         var lunarDate = document.createElement('div');
         lunarDate.className = 'lunarDate';
         const lunarInfo = Lunar.toLunar(year, month, count);
-        if (lunarInfo[8] !== "") {
+
+        if (holidays.indexOf(year.toString() + month + count) > -1) {
+            lunarDate.innerHTML = getStatHolidayNameByDate(year.toString() + month + count);
+            lunarDate.style.color = "red";
+        }
+
+        else if (lunarInfo[8] !== "") {
             lunarDate.innerHTML = lunarInfo[8];
             lunarDate.style.color = "red";
         }
-        lunarDate.innerHTML = lunarInfo[8] === "" ? lunarInfo[5] + ' ' + lunarInfo[6] : lunarInfo[8];
+        else {
+            lunarDate.innerHTML = lunarInfo[8] === "" ? lunarInfo[5] + ' ' + lunarInfo[6] : lunarInfo[8];
+        }
         calendarCell[startIndex].appendChild(lunarDate);
 
         calendarCell[today + gap].classList.add('today');
@@ -78,8 +85,8 @@ function renderCalendarDays(date) {
         count++;
         startIndex++;
 
-        month ++;
-        month --;
+        month++;
+        month--;
     }
     // SetTime(currentDay, today, hour, minutes,seconds);
 
@@ -108,7 +115,7 @@ function CountOfRow(date) {
     var month = date.getMonth();
     var numberOfDays = new Date(year, month + 1, 0).getDate();
     var firstDay = new Date(year, month, 1).getDay();
-    firstDay = firstDay == 0? 7 : firstDay;
+    firstDay = firstDay == 0 ? 7 : firstDay;
 
     var rows = Math.ceil((numberOfDays + firstDay - 1) / 7);
     return rows;
@@ -226,20 +233,32 @@ function createCORSRequest(method, url) {
     return xhr;
 }
 
-function updateStatHolidays(year){
+function updateStatHolidays(year) {
     // mount stat holidays
     statHolidays = [];
     tempHolidays = [];
 
     statHolidays = CanadaStatHolidays.getStatHolidays(year)
-    for(var i = 0; i< statHolidays.length; i++){
+    for (var i = 0; i < statHolidays.length; i++) {
         // holidays.push(statHolidays[i].id);
-        if(statHolidays[i].observedDate){
+        if (statHolidays[i].observedDate) {
             tempHolidays.push(statHolidays[i].observedDate);
         }
-        else{
+        else {
             tempHolidays.push(statHolidays[i].id);
         }
     }
     return tempHolidays;
+}
+
+function getStatHolidayNameByDate(dateInString){
+    if(!statHolidays) return;
+
+    for(var i = 0; i < statHolidays.length; i++){
+        const statHoliday = statHolidays[i];
+        if(statHoliday.id === dateInString || statHoliday.observedDate === dateInString){
+            return statHoliday.name;
+        }
+    }
+    return;
 }
