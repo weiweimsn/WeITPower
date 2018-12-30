@@ -65,9 +65,10 @@ function renderCalendarDays(date) {
         var lunarDate = document.createElement('div');
         lunarDate.className = 'lunarDate';
         const lunarInfo = Lunar.toLunar(year, month, count);
+        const statHolidayName = getStatHolidayNameByDate(year.toString() + month + count);
 
-        if (holidays.indexOf(year.toString() + month + count) > -1) {
-            lunarDate.innerHTML = getStatHolidayNameByDate(year.toString() + month + count);
+        if (holidays.indexOf(year.toString() + month + count) > -1 && statHolidayName !== "") {
+            lunarDate.innerHTML = statHolidayName;
             lunarDate.style.color = "red";
         }
 
@@ -244,21 +245,23 @@ function updateStatHolidays(year) {
         if (statHolidays[i].observedDate) {
             tempHolidays.push(statHolidays[i].observedDate);
         }
-        else {
-            tempHolidays.push(statHolidays[i].id);
-        }
+        // else {
+        //     tempHolidays.push(statHolidays[i].id);
+        // }
+        tempHolidays.push(statHolidays[i].id);
     }
     return tempHolidays;
 }
 
-function getStatHolidayNameByDate(dateInString){
-    if(!statHolidays) return;
+function getStatHolidayNameByDate(dateInString) {
+    if (!statHolidays) return "";
 
-    for(var i = 0; i < statHolidays.length; i++){
+    for (var i = 0; i < statHolidays.length; i++) {
         const statHoliday = statHolidays[i];
-        if(statHoliday.id === dateInString || statHoliday.observedDate === dateInString){
+        if(statHoliday.id === dateInString || statHoliday.observedDate === statHoliday.id){
+        // if (statHoliday.id === dateInString) {
             return statHoliday.name;
         }
     }
-    return;
+    return "";
 }
