@@ -230,7 +230,7 @@ function updateStatHolidays(year) {
     statHolidays = [];
     tempHolidays = [];
 
-    statHolidays = CanadaStatHolidays.getStatHolidays(year)
+    // statHolidays = CanadaStatHolidays.getStatHolidays(year);
     for (var i = 0; i < statHolidays.length; i++) {
         // holidays.push(statHolidays[i].id);
         if (statHolidays[i].observedDate) {
