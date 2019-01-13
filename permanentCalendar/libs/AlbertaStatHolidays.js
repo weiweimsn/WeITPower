@@ -1,7 +1,7 @@
 // input: year, province
 // output: an array of stat holidays
 
-var CanadaStatHolidays = {
+var AlbertaStatHolidays = {
     statHolidays: [],
     getStatHolidays: function (year, province = "Alberta") {
         this.statHolidays.push(this.getNewYearsDay(year));
@@ -74,6 +74,24 @@ var CanadaStatHolidays = {
         }
     },
  
+    getGoodFriDay: function (year, province = "Ontario") {
+        const easterSunday = this.getEasterSunday(year, province);
+        var dayInMonth = easterSunday.getDate() - 2;
+        var month = easterSunday.getMonth() + 1;
+        if (dayInMonth <= 0) {
+            month--;
+            dayInMonth += 31; // 31 is from the number of days in March
+        }
+        // var day = easterSunday - 2;
+        if (dayInMonth < 10) {
+            var key = year + "0" + month + "0" + dayInMonth;
+        }
+        else {
+            var key = year + "0" + month + dayInMonth;
+        }
+        return { id: key, name: "Good Friday", observed: false};
+    },
+
     getVictoriaDay: function (year, province = "Alberta") {
         const date = new Date(year, 4, 24);
         const weekday = date.getDay();
@@ -240,5 +258,24 @@ var CanadaStatHolidays = {
         else {
             return { id: year + "12" + today, name: "Chrismas Day", observed: false };
         }
+    },
+
+    getEasterSunday: function (year, province = "Ontario") {
+        var f = Math.floor,
+            // Golden Number - 1
+            G = year % 19,
+            C = f(year / 100),
+            // related to Epact
+            H = (C - f(C / 4) - f((8 * C + 13) / 25) + 19 * G + 15) % 30,
+            // number of days from 21 March to the Paschal full moon
+            I = H - f(H / 28) * (1 - f(29 / (H + 1)) * f((21 - G) / 11)),
+            // weekday for the Paschal full moon
+            J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7,
+            // number of days from 21 March to the Sunday on or before the Paschal full moon
+            L = I - J,
+            month = 3 + f((L + 40) / 44),
+            day = L + 28 - 31 * f(month / 4);
+
+        return new Date(year, month - 1, day);
     }
 }
