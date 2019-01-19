@@ -1,6 +1,3 @@
-// input: year, province
-// output: an array of stat holidays
-
 var CanadaStatHolidays = {
     statHolidays: [],
     getStatHolidays: function (year, province = "Ontario") {

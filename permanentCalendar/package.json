@@ -1,0 +1,36 @@
+{
+  "name": "perpetualcalendar",
+  "version": "1.0.0",
+  "description": "Perpetual Calendar with Chinese Lunar Calendars and Ontario Stat Holidays",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weiweimsn/WeITPower.git"
+  },
+  "keywords": [
+    "Perpetual",
+    "Calendar"
+  ],
+  "author": "Wei Wei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weiweimsn/WeITPower/issues"
+  },
+  "homepage": "https://github.com/weiweimsn/WeITPower#readme",
+  "devDependencies": {
+    "css-loader": "^2.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "jquery": "^3.3.1",
+    "open-iconic": "^1.1.1",
+    "popper.js": "^1.14.6"
+  }
+}
