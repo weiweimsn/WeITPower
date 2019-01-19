@@ -9,11 +9,11 @@ var CanadaStatHolidays = {
         this.statHolidays.push(this.getGoodFriDay(year));
         this.statHolidays.push(this.getVictoriaDay(year));
         this.statHolidays.push(this.getCanadaDay(year));
-        this.statHolidays.push(this.getCivicDay(year));
+        // this.statHolidays.push(this.getCivicDay(year));
         this.statHolidays.push(this.getLabourDay(year));
         this.statHolidays.push(this.getThanksgivingDay(year));
         this.statHolidays.push(this.getChrismasDay(year));
-        this.statHolidays.push(this.getBoxingDay(year));
+        this.statHolidays.push(this.getBoxingDay());
 
         return this.statHolidays;
     },
@@ -52,10 +52,10 @@ var CanadaStatHolidays = {
 
         switch (weekday) {
             case 0:
-                key = year + "02" + (today + 22);
-                return { id: key, name: "Family Day", observed: true, observedDate: year + "02" + (today + 23) };
+                key = year + "02" + (today + 15);
+                return { id: key, name: "Family Day", observed: false, observedDate: year + "02" + (today + 15) };
             case 1:
-                key = year + "02" + (today + 21);
+                key = year + "02" + (today + 14);
                 return { id: key, name: "Family Day", observed: false};
             case 2:
                 key = year + "02" + (today + 20);
@@ -72,7 +72,7 @@ var CanadaStatHolidays = {
                 return { id: key, name: "Family Day", observed: false};
             case 6:
                 key = year + "02" + (today + 16);
-                return { id: key, name: "Family Day", observed: true, observedDate: year + "02" + (today + 15) };
+                return { id: key, name: "Family Day", observed: false, observedDate: year + "02" + (today + 16) };
         }
     },
     getGoodFriDay: function (year, province = "Ontario") {
@@ -221,16 +221,15 @@ var CanadaStatHolidays = {
         var weekday = date.getDay();
 
         // today's date
-        var today = date.getDate();
+        var today = 1;
         let key;
 
         switch (weekday) {
             case 0:
-                key = today + 8 < 10? year + "100" + (today + 8) :  year + "10" + (today + 1);
+                key = year + "100" + (today + 8);
                 return { id: key, name: "Thanksgiving Day", observed: false};
             case 1:
-                key = year + "10" + (today + 7);
-                key = today + 7 < 10? year + "100" + (today + 7) :  year + "10" + (today + 1);
+                key = year + "100" + (today + 7);
                 return { id: key, name: "Thanksgiving Day", observed: false};
             case 2:
                 key = year + "10" + (today + 13);
