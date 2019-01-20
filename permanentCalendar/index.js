@@ -1,3 +1,6 @@
+import CanadaStatHolidays from './libs/CanadaStatHolidays';
+import Lunar from './libs/lunarCalendar';
+
 var currentDate = new Date();
 var YearChangeEvent;
 var currentYear;
@@ -80,11 +83,13 @@ function renderCalendarDays(date) {
 
         else if (holidays.indexOf(year.toString() + month + count) > -1 && statHolidayName !== "") {
             lunarDate.innerHTML = statHolidayName;
+            lunarDate.className = "statHolidayName";
             lunarDate.style.color = "red";
         }
 
         else if (lunarInfo[8] !== "") {
             lunarDate.innerHTML = lunarInfo[8];
+            lunarDate.className = 'lunarDate';
             lunarDate.style.color = "red";
         }
         else {
@@ -221,36 +226,27 @@ function setYearInfo(e) {
     holidays = updateStatHolidays(currentDate.getFullYear());
 }
 
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
-
-        // Check if the XMLHttpRequest object has a "withCredentials" property.
-        // "withCredentials" only exists on XMLHTTPRequest2 objects.
-        xhr.open(method, url, true);
-
-    } else if (typeof XDomainRequest != "undefined") {
-
-        // Otherwise, check if XDomainRequest.
-        // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
-
-    } else {
-
-        // Otherwise, CORS is not supported by the browser.
-        xhr = null;
-
+function createCORSRequest() {
+    var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
+    var httpRequest = HttpRequest;
+    
+    httpRequest.onload = function(response){
+        console.log(response);
     }
-    return xhr;
+
+    httpRequest.onerror = function(error){
+        console.log(error);
+    }
+
+    httpRequest.send();
 }
 
 function updateStatHolidays(year) {
     // mount stat holidays
     statHolidays = [];
-    tempHolidays = [];
+    var tempHolidays = [];
 
-    // statHolidays = CanadaStatHolidays.getStatHolidays(year);
+    statHolidays = CanadaStatHolidays.getStatHolidays(year);
     for (var i = 0; i < statHolidays.length; i++) {
         // holidays.push(statHolidays[i].id);
         if (statHolidays[i].observedDate) {

@@ -107,7 +107,7 @@ var Lunar = {
         var len = (yearData[0] == 0 ? 12 : 13);
         for (var i = 0; i < len; i++) {
             temp = 0;
-            for (j = 0; j <= i; j++) {
+            for (var j = 0; j <= i; j++) {
                 temp += monthData[j];
             }
             res.push(temp);
@@ -187,6 +187,7 @@ var Lunar = {
     //中文日期
     chineseNumber: function (num) {
         var dateHash = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+        let res;
         if (num <= 10) {
             res = '初' + dateHash[num];
         } else if (num > 10 && num < 20) {
@@ -264,3 +265,5 @@ var Lunar = {
         return solarTerms; 
         }
 };
+
+export default Lunar;
