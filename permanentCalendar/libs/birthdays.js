@@ -3,3 +3,5 @@ var Birthdays = (function(){
     let MichaelBirthday = {date: '0717', isLunar: false, name: 'Michael Day'};
     return [StanleyBirthday, MichaelBirthday];
 })();
+
+export default Birthdays;
