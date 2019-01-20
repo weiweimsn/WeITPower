@@ -4,11 +4,6 @@ html, body{
     margin: 0 auto;
 }
 
-body{
-    /* background: url('https://i.ytimg.com/vi/rfZsNKADc4Y/maxresdefault.jpg') no-repeat;
-    background-size:cover; */
-}
-
 #buttonContainer{
     margin: 0 auto;
     width: 100%;
@@ -24,4 +19,8 @@ body{
     height: 70px;
     background: url('https://www.1and1.ca/digitalguide/fileadmin/DigitalGuide/Teaser/google-search-t.jpg');
     background-size: 180px 70px;
+}
+
+.birthday{
+    background-color: blue;
 }

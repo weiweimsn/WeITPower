@@ -3,6 +3,7 @@ var YearChangeEvent;
 var currentYear;
 var statHolidays;
 var holidays = [];
+var birthdays = findAllBirthdays();
 
 window.onload = function () {
     preLoad();
@@ -21,7 +22,7 @@ function preLoad() {
 
     prevMonth.addEventListener('click', goToPrevMonth);
     nextMonth.addEventListener('click', goToNextMonth);
-    currentYear.addEventListener('onYearChanged', setYearInfo);
+    currentYear.addEventListener('onYearChanged', () => {setYearInfo(); birthdays = findAllBirthdays()});
     currentYear.dispatchEvent(YearChangeEvent);
 
     updateStatHolidays(new Date().getFullYear());
@@ -65,9 +66,19 @@ function renderCalendarDays(date) {
         var lunarDate = document.createElement('div');
         lunarDate.className = 'lunarDate';
         const lunarInfo = Lunar.toLunar(year, month, count);
+
+        // check if birthdays
+        let isBirthday = checkBirthdays(birthdays, month + count);
+
         const statHolidayName = getStatHolidayNameByDate(year.toString() + month + count);
 
-        if (holidays.indexOf(year.toString() + month + count) > -1 && statHolidayName !== "") {
+        if(isBirthday){
+            lunarDate.innerHTML = birthdays[month+count];
+            lunarDate.style.color = "red";
+            calendarCell[startIndex].classList.add('birthday');
+        }
+
+        else if (holidays.indexOf(year.toString() + month + count) > -1 && statHolidayName !== "") {
             lunarDate.innerHTML = statHolidayName;
             lunarDate.style.color = "red";
         }
@@ -264,4 +275,35 @@ function getStatHolidayNameByDate(dateInString) {
         }
     }
     return "";
+}
+
+function findAllBirthdays(){
+    var year = currentDate.getFullYear();
+    var days = {};
+    for(let i = 0; i < Birthdays.length; i++){
+        var birthday = Birthdays[i];
+        if(birthday.isLunar){
+            let solarDays = Lunar.toSolar(year, parseInt(birthday.date.substr(0, 2)), parseInt(birthday.date.substr(2, 2)));
+            let month = solarDays[1] < 10? "0" + solarDays[1] : solarDays[1].toString();
+            let day = solarDays[2] < 10? "0" + solarDays[2] : solarDays[2].toString();
+            days[month + day] = birthday.name;
+        }
+        else
+        {
+            let solarDays = [parseInt(birthday.date.substr(0, 2)), parseInt(birthday.date.substr(2, 2))];
+            let month = solarDays[0] < 10? "0" + solarDays[0] : solarDays[0].toString();
+            let day = solarDays[1] < 10? "0" + solarDays[1] : solarDays[1].toString();
+            days[month + day] = birthday.name;
+        }
+    }
+    return days;
+}
+
+function checkBirthdays(birthdays, targetDay){
+    if(birthdays[targetDay]){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
