@@ -315,4 +315,6 @@ var CanadaStatHolidays = {
 
         return new Date(year, month - 1, day);
     }
-}
+};
+
+export default CanadaStatHolidays;

@@ -1,3 +1,6 @@
+import CanadaStatHolidays from './libs/CanadaStatHolidays';
+import Lunar from './libs/lunarCalendar';
+
 var currentDate = new Date();
 var YearChangeEvent;
 var currentYear;
@@ -69,11 +72,13 @@ function renderCalendarDays(date) {
 
         if (holidays.indexOf(year.toString() + month + count) > -1 && statHolidayName !== "") {
             lunarDate.innerHTML = statHolidayName;
+            lunarDate.className = "statHolidayName";
             lunarDate.style.color = "red";
         }
 
         else if (lunarInfo[8] !== "") {
             lunarDate.innerHTML = lunarInfo[8];
+            lunarDate.className = 'lunarDate';
             lunarDate.style.color = "red";
         }
         else {
@@ -228,9 +233,9 @@ function createCORSRequest() {
 function updateStatHolidays(year) {
     // mount stat holidays
     statHolidays = [];
-    tempHolidays = [];
+    var tempHolidays = [];
 
-    // statHolidays = CanadaStatHolidays.getStatHolidays(year);
+    statHolidays = CanadaStatHolidays.getStatHolidays(year);
     for (var i = 0; i < statHolidays.length; i++) {
         // holidays.push(statHolidays[i].id);
         if (statHolidays[i].observedDate) {

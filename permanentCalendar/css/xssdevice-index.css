@@ -2,6 +2,8 @@
 @media screen and  (max-width: 420px) {
     .col {
         font-size: 1rem;
+        max-width: 14%;
+        height: 70px;
     }
     .row.currentMonthRow{
         justify-content: center;
@@ -16,6 +18,13 @@
 
     .row.currentMonthRow span{
         margin: 0 10px;
+    }
+
+    .statHolidayName{
+        font-size: 0.5rem;
+        margin-top: 15%;
+        font-style: italic;
+        text-align: center;
     }
     
 }
