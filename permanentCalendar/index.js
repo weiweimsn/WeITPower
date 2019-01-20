@@ -1,5 +1,6 @@
 import CanadaStatHolidays from './libs/CanadaStatHolidays';
 import Lunar from './libs/lunarCalendar';
+import Birthdays from './libs/birthdays';
 
 var currentDate = new Date();
 var YearChangeEvent;
