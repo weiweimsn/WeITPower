@@ -65,6 +65,12 @@
         margin-top: -8%;
         font-style: italic;
     }
+
+    .statHolidayName{
+        font-size: 0.6rem;
+        font-style: italic;
+        text-align: center;
+    }
     
     .previousMonth, .nextMonth {
         border: none;
