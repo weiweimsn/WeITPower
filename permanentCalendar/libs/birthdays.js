@@ -8,4 +8,4 @@ var Birthdays = (function(){
     return [XieZhiQiBirthday, TangYuLanBirthday, WeiJianYongBirthday];
 })();
 
-export default Birthdays;
+// export default Birthdays;
