@@ -60,8 +60,8 @@ function renderCalendarDays(date) {
             span.style.color = "red";
         }
         // if today is a stat holiday or observed stat holiday, make it red
-        count = count < 10 ? "0" + count : count;
-        month = month < 10 ? "0" + month : month;
+        count = count < 10 ? "0" + count : count.toString();
+        month = month < 10 ? "0" + month : month.toString();
         if (holidays.indexOf(year.toString() + month + count) > -1) {
             span.style.color = "red";
         }
