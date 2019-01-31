@@ -11,4 +11,4 @@ var Birthdays = (function(){
     return [WaiGongBirthday,WaiPoBirthday, MyMomBirthday, XieZhiQiBirthday, TangYuLanBirthday, WeiJianYongBirthday];
 })();
 
-// export default Birthdays;
+export default Birthdays;
