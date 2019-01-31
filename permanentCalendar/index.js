@@ -2,49 +2,51 @@ import CanadaStatHolidays from './libs/CanadaStatHolidays';
 import Lunar from './libs/lunarCalendar';
 import Birthdays from './libs/birthdays';
 
-var currentDate = new Date();
+// make date a string type so it is compatible with invalid date
+var currentDate = new Date().toLocaleDateString();
 var YearChangeEvent;
 var currentYear;
 var statHolidays;
 var holidays = [];
-var birthdays = findAllBirthdays();
+// var birthdays = findAllBirthdays();
+var birthdays = {};
 
 window.onload = function () {
     preLoad();
     // renderCalendarDays();
-    var rowsOfCurrentMonth = CountOfRow(new Date());
-    RenderCalander(rowsOfCurrentMonth);
-    renderCalendarDays(new Date());
+    var rowsOfCurrentMonth = CountOfRow(currentDate);
+    RenderCalanderFrame(rowsOfCurrentMonth);
+    renderCalendarDays(currentDate);
 }
 
 
 function preLoad() {
-    YearChangeEvent = new CustomEvent('onYearChanged');
+    YearChangeEvent = new CustomEvent('onYearChanged', {"year": currentDate.getYear()});
     var prevMonth = document.getElementsByClassName("previousMonth")[0];
     var nextMonth = document.getElementsByClassName("nextMonth")[0];
     currentYear = document.getElementById('currentYear');
 
     prevMonth.addEventListener('click', goToPrevMonth);
     nextMonth.addEventListener('click', goToNextMonth);
-    currentYear.addEventListener('onYearChanged', () => {setYearInfo(); birthdays = findAllBirthdays()});
+    currentYear.addEventListener('onYearChanged', () => { setYearInfo(); birthdays = findAllBirthdays() });
     currentYear.dispatchEvent(YearChangeEvent);
 
-    updateStatHolidays(new Date().getFullYear());
+    updateStatHolidays(currentDate.getYear());
 }
 
 function renderCalendarDays(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var today = date.getDate();
+
+    var year = date.getYear();
+    var month = date.getMonth();
+    var today = date.getToday();
+
+
     var firstDay = new Date(year, month - 1, 1).getDay();
-    var dayOfWeek = date.getDay() === 0 ? 7 : date.getDate();
     var numberOfDays = new Date(year, month, 0).getDate();
-    var hour = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
 
     var count = 1;
-    var startIndex = firstDay == 0 ? 7 + 6 : firstDay + 6;
+    firstDay = firstDay == 0 ? 7: firstDay;
+    var startIndex = firstDay + 6;
     var currentDay;
     var gap = firstDay - 1 + 6;
     currentDate = date;
@@ -76,8 +78,8 @@ function renderCalendarDays(date) {
 
         const statHolidayName = getStatHolidayNameByDate(year.toString() + month + count);
 
-        if(isBirthday){
-            lunarDate.innerHTML = birthdays[month+count];
+        if (isBirthday) {
+            lunarDate.innerHTML = birthdays[month + count];
             lunarDate.style.color = "red";
             calendarCell[startIndex].classList.add('birthday');
         }
@@ -97,8 +99,10 @@ function renderCalendarDays(date) {
             lunarDate.innerHTML = lunarInfo[8] === "" ? lunarInfo[5] + ' ' + lunarInfo[6] : lunarInfo[8];
         }
         calendarCell[startIndex].appendChild(lunarDate);
-
-        calendarCell[today + gap].classList.add('today');
+        if(today <= numberOfDays){
+          calendarCell[today + gap].classList.add('today');  
+        }
+        
         currentDay = calendarCell[today + gap];
         count++;
         startIndex++;
@@ -129,10 +133,10 @@ function SetTime(currentDay, today, hour, minute, second) {
 }
 
 function CountOfRow(date) {
-    var year = date.getFullYear();
+    var year = date.getYear();
     var month = date.getMonth();
-    var numberOfDays = new Date(year, month + 1, 0).getDate();
-    var firstDay = new Date(year, month, 1).getDay();
+    var numberOfDays = new Date(year, month, 0).getDate();
+    var firstDay = new Date(year, month - 1, 1).getDay();
     firstDay = firstDay == 0 ? 7 : firstDay;
 
     var rows = Math.ceil((numberOfDays + firstDay - 1) / 7);
@@ -140,7 +144,7 @@ function CountOfRow(date) {
 }
 
 // create all days / cells in a month in the calendar
-function RenderCalander(rows) {
+function RenderCalanderFrame(rows) {
     var calendar = document.getElementsByClassName('calendarBody')[0];
     calendar.innerHTML = '';
 
@@ -205,37 +209,68 @@ function setDisplayMonth(month) {
 }
 
 function goToPrevMonth() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    currentYear.dispatchEvent(YearChangeEvent);
-    var rowsOfCurrentMonth = CountOfRow(currentDate);
-    RenderCalander(rowsOfCurrentMonth);
-    renderCalendarDays(currentDate);
+    let localeDateString;
+    let prevMonth = currentDate.getMonth() - 1;
+    let day = currentDate.getToday();
+    let year = currentDate.getYear();
+    let isYearChanged = false;
+
+    if(prevMonth < 1){
+        prevMonth = 1;
+        year--;
+        isYearChanged = true;
+    }
+
+    localeDateString = prevMonth.toString() + '/' + day + '/' + year;
+
+    if(isYearChanged){
+        currentYear.dispatchEvent(YearChangeEvent);
+    }
+    
+    var rowsOfCurrentMonth = CountOfRow(localeDateString);
+    RenderCalanderFrame(rowsOfCurrentMonth);
+    renderCalendarDays(localeDateString);
 }
 
 function goToNextMonth() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    currentYear.dispatchEvent(YearChangeEvent);
-    var rowsOfCurrentMonth = CountOfRow(currentDate);
-    RenderCalander(rowsOfCurrentMonth);
-    renderCalendarDays(currentDate);
+    let localeDateString;
+    let nextMonth = currentDate.getMonth() + 1;
+    let day = currentDate.getToday();
+    let year = currentDate.getYear();
+    let isYearChanged = false;
+
+    if(nextMonth > 12){
+        nextMonth = 1;
+        year++;
+        isYearChanged = true;
+    }
+    currentDate = localeDateString = nextMonth.toString() + '/' + day + '/' + year;
+    
+    if(isYearChanged){
+        currentYear.dispatchEvent(YearChangeEvent);
+    }
+    
+    var rowsOfCurrentMonth = CountOfRow(localeDateString);
+    RenderCalanderFrame(rowsOfCurrentMonth);
+    renderCalendarDays(localeDateString);
 }
 
-function setYearInfo(e) {
-    currentYear.innerHTML = currentDate.getFullYear() + '&nbsp&nbsp';
+function setYearInfo() {
+    currentYear.innerHTML = currentDate.getYear() + '&nbsp&nbsp';
 
     // upate stat holidays in a new year
-    holidays = updateStatHolidays(currentDate.getFullYear());
+    holidays = updateStatHolidays(currentDate.getYear());
 }
 
 function createCORSRequest() {
     var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
     var httpRequest = HttpRequest;
-    
-    httpRequest.onload = function(response){
+
+    httpRequest.onload = function (response) {
         console.log(response);
     }
 
-    httpRequest.onerror = function(error){
+    httpRequest.onerror = function (error) {
         console.log(error);
     }
 
@@ -266,41 +301,50 @@ function getStatHolidayNameByDate(dateInString) {
 
     for (var i = 0; i < statHolidays.length; i++) {
         const statHoliday = statHolidays[i];
-        if(statHoliday.id === dateInString || statHoliday.observedDate === statHoliday.id){
-        // if (statHoliday.id === dateInString) {
+        if (statHoliday.id === dateInString || statHoliday.observedDate === statHoliday.id) {
+            // if (statHoliday.id === dateInString) {
             return statHoliday.name;
         }
     }
     return "";
 }
 
-function findAllBirthdays(){
-    var year = currentDate.getFullYear();
+function findAllBirthdays() {
+    var year = currentDate.getYear();
     var days = {};
-    for(let i = 0; i < Birthdays.length; i++){
+    for (let i = 0; i < Birthdays.length; i++) {
         var birthday = Birthdays[i];
-        if(birthday.isLunar){
+        if (birthday.isLunar) {
             let solarDays = Lunar.toSolar(year, parseInt(birthday.date.substr(0, 2)), parseInt(birthday.date.substr(2, 2)));
-            let month = solarDays[1] < 10? "0" + solarDays[1] : solarDays[1].toString();
-            let day = solarDays[2] < 10? "0" + solarDays[2] : solarDays[2].toString();
+            let month = solarDays[1] < 10 ? "0" + solarDays[1] : solarDays[1].toString();
+            let day = solarDays[2] < 10 ? "0" + solarDays[2] : solarDays[2].toString();
             days[month + day] = birthday.name;
         }
-        else
-        {
+        else {
             let solarDays = [parseInt(birthday.date.substr(0, 2)), parseInt(birthday.date.substr(2, 2))];
-            let month = solarDays[0] < 10? "0" + solarDays[0] : solarDays[0].toString();
-            let day = solarDays[1] < 10? "0" + solarDays[1] : solarDays[1].toString();
+            let month = solarDays[0] < 10 ? "0" + solarDays[0] : solarDays[0].toString();
+            let day = solarDays[1] < 10 ? "0" + solarDays[1] : solarDays[1].toString();
             days[month + day] = birthday.name;
         }
     }
     return days;
 }
 
-function checkBirthdays(birthdays, targetDay){
-    if(birthdays[targetDay]){
+function checkBirthdays(birthdays, targetDay) {
+    if (birthdays[targetDay]) {
         return true;
     }
-    else{
+    else {
         return false;
     }
+}
+
+String.prototype.getYear= function(){
+    return parseInt(this.substr(this.lastIndexOf('/') + 1));
+}
+String.prototype.getMonth = function() {
+    return parseInt(this.substring(0, this.indexOf('/')));
+}
+String.prototype.getToday = function() {
+    return parseInt(this.substring(this.indexOf('/') + 1, this.lastIndexOf('/')));
 }
