@@ -35,22 +35,6 @@ function preLoad() {
 }
 
 function renderCalendarDays(date) {
-    // var year = date.getFullYear();
-    // var month = date.getMonth() + 1;
-    // var today = date.getDate();
-
-    // if (Object.prototype.toString.call(date) === '[object Date]') {
-    //     var year = date.getFullYear();
-    //     var month = date.getMonth() + 1;
-    //     var today = date.getDate();
-    // }
-    // else {
-    //     var year = parseInt(date.substr(date.lastIndexOf('/') + 1));
-    //     var month = parseInt(date.substring(0, date.indexOf('/')));
-    //     var today = parseInt(date.substring(date.indexOf('/') + 1, date.lastIndexOf('/')));
-    // }
-
-
 
     var year = date.getYear();
     var month = date.getMonth();
@@ -58,11 +42,7 @@ function renderCalendarDays(date) {
 
 
     var firstDay = new Date(year, month - 1, 1).getDay();
-    // var dayOfWeek = date.getDay() === 0 ? 7 : date.getDate();
     var numberOfDays = new Date(year, month, 0).getDate();
-    // var hour = date.getHours();
-    // var minutes = date.getMinutes();
-    // var seconds = date.getSeconds();
 
     var count = 1;
     firstDay = firstDay == 0 ? 7: firstDay;
