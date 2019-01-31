@@ -3,7 +3,7 @@ import Lunar from './libs/lunarCalendar';
 import Birthdays from './libs/birthdays';
 
 // make date a string type so it is compatible with invalid date
-var currentDate = new Date().toLocaleDateString();
+var currentDate = "";
 var YearChangeEvent;
 var currentYear;
 var statHolidays;
@@ -12,6 +12,7 @@ var holidays = [];
 var birthdays = {};
 
 window.onload = function () {
+    currentDate = new Date().getLocaleDateInString();
     preLoad();
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(currentDate);
@@ -347,4 +348,7 @@ String.prototype.getMonth = function() {
 }
 String.prototype.getToday = function() {
     return parseInt(this.substring(this.indexOf('/') + 1, this.lastIndexOf('/')));
+}
+Date.prototype.getLocaleDateInString = function(){
+    return this.getMonth() + 1 + '/' + this.getDate() + '/' + this.getFullYear()
 }
