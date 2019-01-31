@@ -10,7 +10,7 @@ var CanadaStatHolidays = {
         this.statHolidays.push(this.getLabourDay(year));
         this.statHolidays.push(this.getThanksgivingDay(year));
         this.statHolidays.push(this.getChrismasDay(year));
-        this.statHolidays.push(this.getBoxingDay());
+        this.statHolidays.push(this.getBoxingDay(year));
 
         return this.statHolidays;
     },
