@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"/>
+    <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
+    <script src="./main.js"></script>
+    <link rel='stylesheet' type='text/css' href="./style.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="slideshow">
+        <div>
+            <img src="./images/01.jpg">
+        </div>
+        <div>
+            <img src="./images/02.jpg">
+        </div>
+
+        <div>
+            <img src="./images/03.jpg">
+        </div>
+    </div>
+    <div class="leftTurn" onclick="goToPrevPic()">
+        <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
+        <!-- <span class="oi oi-arrow-circle-left"></span> -->
+        <!-- <span class="oi oi-person" title="person" aria-hidden="true"></span> -->
+        <!-- <ion-icon name="arrow-round-back"></ion-icon> -->
+        <ion-icon name="arrow-dropleft-circle"></ion-icon>
+    </div>
+    <div class="rightTurn" onclick="goToNextPic()">
+        <!-- <span class="glyphicon glyphicon-chevron-right"></span> -->
+        <!-- <span class="oi oi-arrow-circle-right"></span> -->
+        <!-- <ion-icon name="arrow-round-forward"></ion-icon> -->
+        <ion-icon name="arrow-dropright-circle"></ion-icon>
+    </div>
+</body>
+
+</html>
