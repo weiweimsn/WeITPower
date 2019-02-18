@@ -217,12 +217,12 @@ function goToPrevMonth() {
     let isYearChanged = false;
 
     if(prevMonth < 1){
-        prevMonth = 1;
+        prevMonth = 12;
         year--;
         isYearChanged = true;
     }
 
-    localeDateString = prevMonth.toString() + '/' + day + '/' + year;
+    currentDate = localeDateString = prevMonth.toString() + '/' + day + '/' + year;
 
     if(isYearChanged){
         currentYear.dispatchEvent(YearChangeEvent);
