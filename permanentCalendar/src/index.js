@@ -1,6 +1,6 @@
-// import CanadaStatHolidays from './libs/CanadaStatHolidays';
-// import Lunar from './libs/lunarCalendar';
-// import Birthdays from './libs/birthdays';
+import CanadaStatHolidays from '../libs/CanadaStatHolidays';
+import Lunar from '../libs/lunarCalendar';
+import Birthdays from '../libs/birthdays';
 
 // make date a string type so it is compatible with invalid date
 var currentDate = new Date().toLocaleDateString();
@@ -16,7 +16,7 @@ window.onload = function () {
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(currentDate);
     RenderCalanderFrame(rowsOfCurrentMonth);
-    renderCalendarDays(currentDate);
+    renderCalendarDays(currentDate); 
 }
 
 
@@ -216,12 +216,12 @@ function goToPrevMonth() {
     let isYearChanged = false;
 
     if(prevMonth < 1){
-        prevMonth = 1;
+        prevMonth = 12;
         year--;
         isYearChanged = true;
     }
 
-    localeDateString = prevMonth.toString() + '/' + day + '/' + year;
+    currentDate = localeDateString = prevMonth.toString() + '/' + day + '/' + year;
 
     if(isYearChanged){
         currentYear.dispatchEvent(YearChangeEvent);
@@ -262,20 +262,20 @@ function setYearInfo() {
     holidays = updateStatHolidays(currentDate.getYear());
 }
 
-function createCORSRequest() {
-    var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
-    var httpRequest = HttpRequest;
+// function createCORSRequest() {
+//     var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
+//     var httpRequest = HttpRequest;
 
-    httpRequest.onload = function (response) {
-        console.log(response);
-    }
+//     httpRequest.onload = function (response) {
+//         console.log(response);
+//     }
 
-    httpRequest.onerror = function (error) {
-        console.log(error);
-    }
+//     httpRequest.onerror = function (error) {
+//         console.log(error);
+//     }
 
-    httpRequest.send();
-}
+//     httpRequest.send();
+// }
 
 function updateStatHolidays(year) {
     // mount stat holidays
