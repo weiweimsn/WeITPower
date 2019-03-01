@@ -5,10 +5,11 @@ var Birthdays = (function(){
     let WeiJianYongBirthday = {date: '0303', isLunar: false, name: 'Wei Jianyong BirthDay'};
     let XieZhiQiBirthday = {date: '1124', isLunar: false, name: 'Xie Zhiqi BirthDay'};
     let MyMomBirthday = {date: '0223', isLunar: true, name: '我妈生日'}; // 19650325 is solar day
+    let WeiJianliBirthday = {date: '0319', isLunar: true, name: '魏建立生日'};
     let WaiGongBirthday = {date: '0826', isLunar: true, name: '邢金权生日'}; // 1943 is the year  下午2点
     let WaiPoBirthday = {date: '1113', isLunar: true, name: '刘路琴生日'}; // 1946 晚上11点
 
-    return [WaiGongBirthday,WaiPoBirthday, MyMomBirthday, XieZhiQiBirthday, TangYuLanBirthday, WeiJianYongBirthday];
+    return [WaiGongBirthday,WaiPoBirthday, MyMomBirthday, XieZhiQiBirthday, TangYuLanBirthday, WeiJianYongBirthday, WeiJianliBirthday];
 })();
 
 export default Birthdays;
