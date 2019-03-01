@@ -171,7 +171,7 @@ function setDisplayMonth(month) {
             currentMonth.innerHTML = 'January';
             break;
         case 1:
-            currentMonth.innerHTML = 'Februry';
+            currentMonth.innerHTML = 'February';
             break;
         case 2:
             currentMonth.innerHTML = 'March';
