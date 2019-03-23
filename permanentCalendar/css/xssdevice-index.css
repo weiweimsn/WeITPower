@@ -1,5 +1,5 @@
 /* extra small devices - screen width less than 420px */
-@media screen and  (max-width: 420px) {
+@media screen and  (max-width: 400px) {
     .col {
         font-size: 1rem;
         max-width: 14%;
@@ -24,7 +24,6 @@
         font-size: 0.5rem;
         margin-top: 15%;
         font-style: italic;
-        text-align: center;
     }
     
 }

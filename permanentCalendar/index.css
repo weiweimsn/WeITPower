@@ -54,6 +54,6 @@ html, body, .container {
     background-color: greenyellow;
 }
 
-.lunarDate{
+.lunarDate, .statHolidayName{
     text-align: center;
 }
