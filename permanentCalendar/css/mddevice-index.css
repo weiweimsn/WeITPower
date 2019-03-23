@@ -67,9 +67,9 @@
     }
 
     .statHolidayName{
-        font-size: 0.6rem;
+        font-size: 0.7rem;
+        margin-top: -8%;
         font-style: italic;
-        text-align: center;
     }
     
     .previousMonth, .nextMonth {

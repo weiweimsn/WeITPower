@@ -17,7 +17,7 @@ window.onload = function () {
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(currentDate);
     RenderCalanderFrame(rowsOfCurrentMonth);
-    renderCalendarDays(currentDate);
+    renderCalendarDays(currentDate); 
 }
 
 
@@ -263,20 +263,20 @@ function setYearInfo() {
     holidays = updateStatHolidays(currentDate.getYear());
 }
 
-function createCORSRequest() {
-    var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
-    var httpRequest = HttpRequest;
+// function createCORSRequest() {
+//     var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
+//     var httpRequest = HttpRequest;
 
-    httpRequest.onload = function (response) {
-        console.log(response);
-    }
+//     httpRequest.onload = function (response) {
+//         console.log(response);
+//     }
 
-    httpRequest.onerror = function (error) {
-        console.log(error);
-    }
+//     httpRequest.onerror = function (error) {
+//         console.log(error);
+//     }
 
-    httpRequest.send();
-}
+//     httpRequest.send();
+// }
 
 function updateStatHolidays(year) {
     // mount stat holidays
