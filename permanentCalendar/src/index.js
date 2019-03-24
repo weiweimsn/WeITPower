@@ -1,6 +1,6 @@
-import CanadaStatHolidays from './libs/CanadaStatHolidays';
-import Lunar from './libs/lunarCalendar';
-import Birthdays from './libs/birthdays';
+import CanadaStatHolidays from '../libs/CanadaStatHolidays';
+import Lunar from '../libs/lunarCalendar';
+import Birthdays from '../libs/birthdays';
 
 // make date a string type so it is compatible with invalid date
 var currentDate = "";
