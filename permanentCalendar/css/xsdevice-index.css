@@ -13,7 +13,7 @@
         height: 70px;
         max-width: 14%;
     }
-    .lunarDate{
+    .lunarDate, .statHolidayName{
         font-size: 0.6rem;
         margin-top: 15%;
         font-style: italic;
@@ -23,9 +23,12 @@
         align-items: center;
         font-size: 1rem;
     }
-    .statHolidayName{
-        font-size: 0.5rem;
-        margin-top: -8%;
-        font-style: italic;
+
+    .calendarBody{
+        /* margin-left: 23px; */
+    }
+
+    .row.header{
+        margin-left: 8px;
     }
 }

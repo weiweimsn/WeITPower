@@ -168,40 +168,40 @@ function setDisplayMonth(month) {
     var currentMonth = document.getElementById('currentMonth');
     switch (month) {
         case 0:
-            currentMonth.innerHTML = 'January';
+            currentMonth.innerHTML = 'Jan';
             break;
         case 1:
-            currentMonth.innerHTML = 'February';
+            currentMonth.innerHTML = 'Feb';
             break;
         case 2:
-            currentMonth.innerHTML = 'March';
+            currentMonth.innerHTML = 'Mar';
             break;
         case 3:
-            currentMonth.innerHTML = 'April';
+            currentMonth.innerHTML = 'Apr';
             break;
         case 4:
             currentMonth.innerHTML = 'May';
             break;
         case 5:
-            currentMonth.innerHTML = 'June';
+            currentMonth.innerHTML = 'Jun';
             break;
         case 6:
-            currentMonth.innerHTML = 'July';
+            currentMonth.innerHTML = 'Jul';
             break;
         case 7:
-            currentMonth.innerHTML = 'August';
+            currentMonth.innerHTML = 'Aug';
             break;
         case 8:
-            currentMonth.innerHTML = 'September';
+            currentMonth.innerHTML = 'Sep';
             break;
         case 9:
-            currentMonth.innerHTML = 'October';
+            currentMonth.innerHTML = 'Oct';
             break;
         case 10:
-            currentMonth.innerHTML = 'November';
+            currentMonth.innerHTML = 'Nov';
             break;
         case 11:
-            currentMonth.innerHTML = 'December';
+            currentMonth.innerHTML = 'Dec';
             break;
         default:
             currentMonth.innerHTML = 'Error';
@@ -302,7 +302,7 @@ function getStatHolidayNameByDate(dateInString) {
 
     for (var i = 0; i < statHolidays.length; i++) {
         const statHoliday = statHolidays[i];
-        if (statHoliday.id === dateInString || statHoliday.observedDate === statHoliday.id) {
+        if (statHoliday.id === dateInString) {
             // if (statHoliday.id === dateInString) {
             return statHoliday.name;
         }
