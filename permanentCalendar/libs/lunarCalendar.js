@@ -168,7 +168,7 @@ var Lunar = {
             }
 
             m = (leapMonth != 0 && t == leapMonth + 1)
-                ? ('闰'+ this.chineseMonth(t - 1))
+                ? ('闰' + this.chineseMonth(t - 1))
                 : this.chineseMonth(((leapMonth != 0 && leapMonth + 1 < t) ? (t - 1) : t));
         }
         lunarArray.push(year, t, e); //年 月 日
@@ -207,7 +207,7 @@ var Lunar = {
         if (year == this.MIN_YEAR && month <= 2 && day <= 9) {
             return [1891, 1, 1, '辛卯', '兔', '正月', '初一'];
         }
-        return this.lunarByBetween(year, this.betweenSolarDays(year, month, day, yearData[1], yearData[2])).concat(this.toJieQi(year,month,day));
+        return this.lunarByBetween(year, this.betweenSolarDays(year, month, day, yearData[1], yearData[2])).concat(this.toJieQi(year, month, day));
         // return this.lunarByBetween(year, this.betweenSolarDays(year, month, day, yearData[1], yearData[2]));
     },
     //转换公历
@@ -217,53 +217,36 @@ var Lunar = {
     toSolar: function (year, month, day) {
         var yearData = this.lunarInfo[year - this.MIN_YEAR];
         var between = this.betweenLunarDays(year, month, day);
-        var ms = new Date(year + "-" + yearData[1] + "-" + yearData[2]).getTime();
-        var s = ms + between * 24 * 60 * 60 * 1000;
-        var d = new Date();
-        d.setTime(s);
-        year = d.getFullYear();
-        month = d.getMonth() + 1;
-        day = d.getDate();
+
+        var zhengYueChuYi = new Date(year, yearData[1] - 1, yearData[2]).getTime();  //正月初一日期
+        var currentLunarDayInSeconds = zhengYueChuYi + between * 24 * 60 * 60 * 1000;
+        var solarDate = new Date();
+        solarDate.setTime(currentLunarDayInSeconds);
+        year = solarDate.getFullYear();
+        month = solarDate.getMonth() + 1;
+        day = solarDate.getDate();
         return [year, month, day];
     },
     ///
-    toJieQi: function (year,month,day){
-        month = month-1;
-        var sTermInfo = new Array(0,21208,42467,63836,85337,107014,128867,150921,173149,195551,218072,240693,263343,285989,308563,331033,353350,375494,397447,419210,440795,462224,483532,504758);
-        var solarTerm = new Array("小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至");
+    toJieQi: function (year, month, day) {
+        month = month - 1;
+        var sTermInfo = new Array(0, 21208, 42467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758);
+        var solarTerm = new Array("小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至");
         var solarTerms = "";
         // 　　此方法是获取该日期是否为某节气
-           var tmp1 = new Date((31556925974.7*(year-1900)+sTermInfo[month*2+1]*60000)+Date.UTC(1900,0,6,2,5));
-           var tmp2 = tmp1.getUTCDate();
-           if (tmp2==day){
-               solarTerms = solarTerm[month*2+1];
-           }
-        //    console.log(solarTerms);
-           tmp1 = new Date((31556925974.7*(year-1900)+sTermInfo[month*2]*60000)+Date.UTC(1900,0,6,2,5));
-           tmp2= tmp1.getUTCDate();
-           if (tmp2==day)
-               solarTerms = solarTerm[month*2];
-        
-        // //　　此方法可以获取该日期处于某节气
-        // while (solarTerms==""){ 
-        // var tmp1 = new Date((31556925974.7*(year-1900)+sTermInfo[month*2+1]*60000)+Date.UTC(1900,0,6,2,5)); 
-        // var tmp2 = tmp1.getUTCDate(); 
-        // if (tmp2==day) solarTerms = solarTerm[month*2+1];
-        // tmp1 = new Date((31556925974.7*(year-1900)+sTermInfo[month*2]*60000)+Date.UTC(1900,0,6,2,5)); 
-        // tmp2= tmp1.getUTCDate(); if (tmp2==day) solarTerms = solarTerm[month*2]; 
-        // if(day>1){
-        //     day=day-1; 
-        // }else {
-        //     month=month-1; 
-        // 　　if(month<0){ 
-        //     year=year-1; month=11; 
-        // 　　} 
-        // 　　dd=31; 
-        // 　　} 
-        // } 
-        
-        return solarTerms; 
+        var tmp1 = new Date((31556925974.7 * (year - 1900) + sTermInfo[month * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+        var tmp2 = tmp1.getUTCDate();
+        if (tmp2 == day) {
+            solarTerms = solarTerm[month * 2 + 1];
         }
+        //    console.log(solarTerms);
+        tmp1 = new Date((31556925974.7 * (year - 1900) + sTermInfo[month * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+        tmp2 = tmp1.getUTCDate();
+        if (tmp2 == day)
+            solarTerms = solarTerm[month * 2];
+
+        return solarTerms;
+    }
 };
 
 export default Lunar;
