@@ -6,7 +6,7 @@ var CanadaStatHolidays = {
         this.statHolidays.push(this.getGoodFriDay(year));
         this.statHolidays.push(this.getVictoriaDay(year));
         this.statHolidays.push(this.getCanadaDay(year));
-        // this.statHolidays.push(this.getCivicDay(year));
+        this.statHolidays.push(this.getCivicDay(year));
         this.statHolidays.push(this.getLabourDay(year));
         this.statHolidays.push(this.getThanksgivingDay(year));
         this.statHolidays.push(this.getChrismasDay(year));
