@@ -1,6 +1,6 @@
-import CanadaStatHolidays from './libs/CanadaStatHolidays';
-import Lunar from './libs/lunarCalendar';
-import Birthdays from './libs/birthdays';
+import CanadaStatHolidays from '../libs/CanadaStatHolidays';
+import Lunar from '../libs/lunarCalendar';
+import Birthdays from '../libs/birthdays';
 
 // make date a string type so it is compatible with invalid date
 var currentDate = "";
@@ -17,7 +17,7 @@ window.onload = function () {
     // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(currentDate);
     RenderCalanderFrame(rowsOfCurrentMonth);
-    renderCalendarDays(currentDate);
+    renderCalendarDays(currentDate); 
 }
 
 
@@ -168,40 +168,40 @@ function setDisplayMonth(month) {
     var currentMonth = document.getElementById('currentMonth');
     switch (month) {
         case 0:
-            currentMonth.innerHTML = 'January';
+            currentMonth.innerHTML = 'Jan';
             break;
         case 1:
-            currentMonth.innerHTML = 'February';
+            currentMonth.innerHTML = 'Feb';
             break;
         case 2:
-            currentMonth.innerHTML = 'March';
+            currentMonth.innerHTML = 'Mar';
             break;
         case 3:
-            currentMonth.innerHTML = 'April';
+            currentMonth.innerHTML = 'Apr';
             break;
         case 4:
             currentMonth.innerHTML = 'May';
             break;
         case 5:
-            currentMonth.innerHTML = 'June';
+            currentMonth.innerHTML = 'Jun';
             break;
         case 6:
-            currentMonth.innerHTML = 'July';
+            currentMonth.innerHTML = 'Jul';
             break;
         case 7:
-            currentMonth.innerHTML = 'August';
+            currentMonth.innerHTML = 'Aug';
             break;
         case 8:
-            currentMonth.innerHTML = 'September';
+            currentMonth.innerHTML = 'Sep';
             break;
         case 9:
-            currentMonth.innerHTML = 'October';
+            currentMonth.innerHTML = 'Oct';
             break;
         case 10:
-            currentMonth.innerHTML = 'November';
+            currentMonth.innerHTML = 'Nov';
             break;
         case 11:
-            currentMonth.innerHTML = 'December';
+            currentMonth.innerHTML = 'Dec';
             break;
         default:
             currentMonth.innerHTML = 'Error';
@@ -263,20 +263,20 @@ function setYearInfo() {
     holidays = updateStatHolidays(currentDate.getYear());
 }
 
-function createCORSRequest() {
-    var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
-    var httpRequest = HttpRequest;
+// function createCORSRequest() {
+//     var url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-CA";
+//     var httpRequest = HttpRequest;
 
-    httpRequest.onload = function (response) {
-        console.log(response);
-    }
+//     httpRequest.onload = function (response) {
+//         console.log(response);
+//     }
 
-    httpRequest.onerror = function (error) {
-        console.log(error);
-    }
+//     httpRequest.onerror = function (error) {
+//         console.log(error);
+//     }
 
-    httpRequest.send();
-}
+//     httpRequest.send();
+// }
 
 function updateStatHolidays(year) {
     // mount stat holidays
@@ -302,7 +302,7 @@ function getStatHolidayNameByDate(dateInString) {
 
     for (var i = 0; i < statHolidays.length; i++) {
         const statHoliday = statHolidays[i];
-        if (statHoliday.id === dateInString || statHoliday.observedDate === statHoliday.id) {
+        if (statHoliday.id === dateInString) {
             // if (statHoliday.id === dateInString) {
             return statHoliday.name;
         }
