@@ -14,7 +14,6 @@ var birthdays = {};
 window.onload = function () {
     currentDate = new Date().getLocaleDateInString();
     preLoad();
-    // renderCalendarDays();
     var rowsOfCurrentMonth = CountOfRow(currentDate);
     RenderCalanderFrame(rowsOfCurrentMonth);
     renderCalendarDays(currentDate); 
@@ -168,40 +167,40 @@ function setDisplayMonth(month) {
     var currentMonth = document.getElementById('currentMonth');
     switch (month) {
         case 0:
-            currentMonth.innerHTML = 'Jan';
+            currentMonth.innerHTML = 'Janary';
             break;
         case 1:
-            currentMonth.innerHTML = 'Feb';
+            currentMonth.innerHTML = 'February';
             break;
         case 2:
-            currentMonth.innerHTML = 'Mar';
+            currentMonth.innerHTML = 'March';
             break;
         case 3:
-            currentMonth.innerHTML = 'Apr';
+            currentMonth.innerHTML = 'April';
             break;
         case 4:
             currentMonth.innerHTML = 'May';
             break;
         case 5:
-            currentMonth.innerHTML = 'Jun';
+            currentMonth.innerHTML = 'June';
             break;
         case 6:
-            currentMonth.innerHTML = 'Jul';
+            currentMonth.innerHTML = 'July';
             break;
         case 7:
-            currentMonth.innerHTML = 'Aug';
+            currentMonth.innerHTML = 'August';
             break;
         case 8:
-            currentMonth.innerHTML = 'Sep';
+            currentMonth.innerHTML = 'September';
             break;
         case 9:
-            currentMonth.innerHTML = 'Oct';
+            currentMonth.innerHTML = 'October';
             break;
         case 10:
-            currentMonth.innerHTML = 'Nov';
+            currentMonth.innerHTML = 'November';
             break;
         case 11:
-            currentMonth.innerHTML = 'Dec';
+            currentMonth.innerHTML = 'December';
             break;
         default:
             currentMonth.innerHTML = 'Error';
