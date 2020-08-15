@@ -1,0 +1,44 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: aliceblue;
+}
+
+.calc {
+  width: 30%;
+  height: auto;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#expression {
+  width: 300px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  color: black;
+  height: 32px;
+}
+
+button {
+  margin: 4px;
+  width: 20%;
+  height: 30px;
+}
+
+.operators {
+  background-color: deepskyblue;
+}
+
+.clearOperator {
+  background-color: red;
+}
+
+.equalOperator {
+  background-color: greenyellow;
+}

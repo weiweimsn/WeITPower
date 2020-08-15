@@ -3,6 +3,7 @@ require("../node_modules/bootstrap/dist/js/bootstrap.js");
 require("../libs/CanadaStatHolidays.js");
 require("../libs/lunarCalendar.js");
 require("../libs/birthdays");
+require("../libs/MemorialDays");
 require("../src/index.js");
 
 require("../node_modules/bootstrap/dist/css/bootstrap.min.css");

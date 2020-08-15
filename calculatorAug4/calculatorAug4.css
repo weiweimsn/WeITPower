@@ -1,43 +1,44 @@
-html, body{
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    height: 100%;
+html,
+body {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  height: 100%;
 }
-body>div{
-    margin: 0 auto;
-    width: 20%;
-    background-color: #068038;   
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 3px solid #73AD21;
-}
-
-[type=button]{
-    margin: 4px;
-    width: 20%;
-    height: 30px;
+body > div {
+  margin: 0 auto;
+  width: 20%;
+  background-color: #068038;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 3px solid #73ad21;
 }
 
-.equalSign{
-    background-color: greenyellow;
+[type="button"] {
+  margin: 4px;
+  width: 20%;
+  height: 30px;
 }
 
-.clearSign{
-    background-color: red;
+.equalSign {
+  background-color: greenyellow;
 }
 
-.operators{
-    background-color: deepskyblue;
+.clearSign {
+  background-color: red;
+}
+
+.operators {
+  background-color: deepskyblue;
 }
 
 .cool-one {
-    width: 100%;
-    border: 1px solid #3D484C;
-    background: rgb(255, 255, 255);
-    border-radius: 5px;
-    font-size: 16px;
-    color: black; 
-    height: 2em;
+  width: 100%;
+  border: 1px solid #3d484c;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  font-size: 16px;
+  color: black;
+  height: 2em;
 }
